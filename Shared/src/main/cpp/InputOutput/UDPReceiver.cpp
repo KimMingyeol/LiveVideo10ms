@@ -105,7 +105,8 @@ void UDPReceiver::receiveFromUDPLoop() {
             const char* p=inet_ntoa(source.sin_addr);
             std::string s1=std::string(p);
             if(senderIP!=s1){
-                senderIP=s1;
+                MLOGE<<s1<<": THIS IP IS NOT ALLOWED";
+                break;
             }
             if(onSourceIP!=nullptr){
                 onSourceIP(p);

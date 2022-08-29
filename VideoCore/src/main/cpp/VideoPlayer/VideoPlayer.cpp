@@ -138,9 +138,9 @@ void VideoPlayer::start(JNIEnv *env,jobject androidContext) {
     //MLOGD("VS_SOURCE: %d",VS_SOURCE);
     switch (VS_SOURCE){
         case UDP:{
-            const int VS_PORT=mVideoSettings.getInt(IDV::VS_PORT);
-            const int VS_PROTOCOL= mVideoSettings.getInt(IDV::VS_PROTOCOL);
-            const auto videoDataType=static_cast<VIDEO_DATA_TYPE>(VS_PROTOCOL);
+            const int VS_PORT=5600;
+            // const int VS_PROTOCOL= mVideoSettings.getInt(IDV::VS_PROTOCOL);
+            const auto videoDataType=VIDEO_DATA_TYPE::RTP_H264;
             mUDPReceiver=std::make_unique<UDPReceiver>(javaVm,VS_PORT, "V_UDP_R", FPV_VR_PRIORITY::CPU_PRIORITY_UDPRECEIVER_VIDEO, [this,videoDataType](const uint8_t* data, size_t data_length) {
                 onNewVideoData(data,data_length,videoDataType);
             }, WANTED_UDP_RCVBUF_SIZE);
